@@ -8,10 +8,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+import com.cab_booking.cab_booking.model.Driver;
+import com.cab_booking.cab_booking.model.User;
 import com.cab_booking.cab_booking.repositary.DriverRepostary;
 import com.cab_booking.cab_booking.repositary.UserRepostary;
 
+
+@Service
 public class CustomerUserDetails implements  UserDetailsService{
 
 	private DriverRepostary driverRepostary;
@@ -28,7 +33,20 @@ public class CustomerUserDetails implements  UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		return null;
+		
+		User user = userRepostary.findByEmail(username);
+		
+		if(user!=null) {
+			return new org.springframework.security.core.userdetails
+					.User(user.getEmail(),user.getPassword(), authorities);
+		}
+		Driver driver = driverRepostary.findByEmail(username);
+		if(driver!=null) {
+			return new org.springframework.security.core.userdetails
+					.User(driver.getEmail(),driver.getPassword(), authorities);
+		}
+		
+		throw new UsernameNotFoundException("user name not found");
 	}
 
 }

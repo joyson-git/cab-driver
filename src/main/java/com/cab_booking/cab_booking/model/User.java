@@ -16,7 +16,22 @@ public class User {
 	
   private String email;
   
-  private String mobile;
+  private String  FullName;
+  
+  public User(String fullName) {
+	super();
+	FullName = fullName;
+}
+
+public String getFullName() {
+	return FullName;
+}
+
+public void setFullName(String fullName) {
+	FullName = fullName;
+}
+
+private String mobile;
 	
   private String password;
   
