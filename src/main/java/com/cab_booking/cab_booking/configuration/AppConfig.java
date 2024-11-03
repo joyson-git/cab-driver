@@ -16,8 +16,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 @Configuration
 public class AppConfig {
 
@@ -26,19 +24,15 @@ public class AppConfig {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeHttpRequests()
+                .authorizeRequests()
                 .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-                //.requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
-                //.requestMatchers(HttpMethod.GET, "/ws/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtTokenValidationFilter(), BasicAuthenticationFilter.class)
                 .csrf().disable()
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
-                .httpBasic()
-                .and()
-                .formLogin();
+                .httpBasic();
 
         return http.build();
     }
