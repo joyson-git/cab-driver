@@ -21,15 +21,17 @@ import com.cab_booking.cab_booking.repositary.LicenseRepositary;
 import com.cab_booking.cab_booking.repositary.RideRepository;
 import com.cab_booking.cab_booking.repositary.VechileRepository;
 import com.cab_booking.cab_booking.request.DriverSigupRequest;
+import com.cab_booking.cab_booking.service.driverService;
+
 
 @Service
-public class driverServiceImplementation implements driverService {
+public class  driverServiceImplementation implements driverService {
 
     @Autowired
-    private DriverRepostary driverRepostary;
+    private DriverRepostary driverRepository;
 
     @Autowired
-    private Calculaters distanceCalculator;
+    private Calculators distanceCalculator;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -38,13 +40,13 @@ public class driverServiceImplementation implements driverService {
     private JwtUtil jwtUtil;
 
     @Autowired
-    private VechileRepository vechileRepository;
+    private VechileRepository vehicleRepository;
 
     @Autowired
-    private LicenseRepositary licenseRepositary;
+    private LicenseRepositary licenseRepository;
 
     @Autowired
-    private RideRepository rideRepositary;
+    private RideRepository rideRepository;
 
     @Override
     public Driver registerDriver(DriverSigupRequest driverSignupRequest) {
@@ -56,7 +58,7 @@ public class driverServiceImplementation implements driverService {
         createdLicense.setLicenseNumber(license.getLicenseNumber());
         createdLicense.setLicenseExpirationDate(license.getLicenseExpirationDate());
 
-        License savedLicense = licenseRepositary.save(createdLicense);
+        License savedLicense = licenseRepository.save(createdLicense);
 
         Vehicle createdVehicle = new Vehicle();
         createdVehicle.setCapacity(vehicle.getCapacity());
@@ -66,7 +68,7 @@ public class driverServiceImplementation implements driverService {
         createdVehicle.setModel(vehicle.getModel());
         createdVehicle.setYear(vehicle.getYear());
 
-        Vehicle savedVehicle = vechileRepository.save(createdVehicle);
+        Vehicle savedVehicle = vehicleRepository.save(createdVehicle);
 
         Driver driver = new Driver();
         String encodedPassword = passwordEncoder.encode(driverSignupRequest.getPassword());
@@ -81,19 +83,19 @@ public class driverServiceImplementation implements driverService {
         driver.setLatitude(driverSignupRequest.getLatitude());
         driver.setLongitude(driverSignupRequest.getLongitude());
 
-        Driver createdDriver = driverRepostary.save(driver);
+        Driver createdDriver = driverRepository.save(driver);
         savedLicense.setDriver(createdDriver);
         savedVehicle.setDriver(createdDriver);
 
-        licenseRepositary.save(savedLicense);
-        vechileRepository.save(savedVehicle);
+        licenseRepository.save(savedLicense);
+        vehicleRepository.save(savedVehicle);
 
         return createdDriver;
     }
 
     @Override
     public List<Driver> getAvailableDrivers(double pickupLatitude, double pickupLongitude, double radius, Ride ride) {
-        List<Driver> allDrivers = driverRepostary.findAll();
+        List<Driver> allDrivers = driverRepository.findAll();
         List<Driver> availableDrivers = new ArrayList<>();
 
         for (Driver driver : allDrivers) {
@@ -116,8 +118,9 @@ public class driverServiceImplementation implements driverService {
         return availableDrivers;
     }
 
+    
     @Override
-    public Driver findNearestDriver(List<Driver> availableDrivers, double pickupLatitude, double pickupLongitude) {
+    public Driver findNearestDriver(List<Driver> availableDrivers, double pickupLatitude, double pickupLongitude, Ride ride) {
         double minDistance = Double.MAX_VALUE;
         Driver nearestDriver = null;
 
@@ -126,7 +129,7 @@ public class driverServiceImplementation implements driverService {
             double driverLongitude = driver.getLongitude();
             double distance = distanceCalculator.calculateDistance(pickupLatitude, pickupLongitude, driverLatitude, driverLongitude);
 
-            if (distance < minDistance) {
+            if (distance < minDistance) { // no need for radius check here since it's done in getAvailableDrivers
                 minDistance = distance;
                 nearestDriver = driver;
             }
@@ -138,10 +141,10 @@ public class driverServiceImplementation implements driverService {
     @Override
     public Driver getRequestedDriver(String jwt) throws DriverException {
         String email = jwtUtil.getEmailFromJwt(jwt);
-        Driver driver = driverRepostary.findByEmail(email);
+        Driver driver = driverRepository.findByEmail(email);
 
         if (driver == null) {
-            throw new DriverException("Driver not exists: " + email);
+            throw new DriverException("Driver does not exist: " + email);
         }
         return driver;
     }
@@ -154,17 +157,19 @@ public class driverServiceImplementation implements driverService {
 
     @Override
     public List<Ride> getAllocatedRides(Integer driverId) throws DriverException {
-        return rideRepositary.getAllocatedRides(driverId);
+        return rideRepository.getAllocatedRides(driverId);
     }
 
     @Override
     public Driver findDriverById(Integer driverId) throws DriverException {
-        Optional<Driver> driverOpt = driverRepostary.findById(driverId);
-        return driverOpt.orElseThrow(() -> new DriverException("Driver not exists with id: " + driverId));
+        Optional<Driver> driverOpt = driverRepository.findById(driverId);
+        return driverOpt.orElseThrow(() -> new DriverException("Driver does not exist with id: " + driverId));
     }
 
     @Override
     public List<Ride> getCompletedRides(Integer driverId) throws DriverException {
-        return rideRepositary.getCompleteRides(driverId);
+        return rideRepository.getCompletedRides(driverId);
     }
+
+
 }

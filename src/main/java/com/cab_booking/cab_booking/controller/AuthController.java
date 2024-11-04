@@ -22,7 +22,7 @@ import com.cab_booking.cab_booking.model.User;
 import com.cab_booking.cab_booking.model.domain.UserRole;
 import com.cab_booking.cab_booking.repositary.DriverRepostary;
 import com.cab_booking.cab_booking.repositary.UserRepostary;
-import com.cab_booking.cab_booking.request.DriverSignupRequest;
+
 import com.cab_booking.cab_booking.request.LoginRequest;
 import com.cab_booking.cab_booking.request.SignupRequest;
 import com.cab_booking.cab_booking.response.JwtResponse;

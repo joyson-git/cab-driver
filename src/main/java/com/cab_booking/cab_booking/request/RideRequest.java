@@ -65,4 +65,7 @@ public class RideRequest {
 				+ ", destinationLongitude=" + destinationLongitude + ", destinationLatitude=" + destinationLatitude
 				+ ", pickupArea=" + pickupArea + ", destinationArea=" + destinationArea + "]";
 	}
+	
+	
+	
 }

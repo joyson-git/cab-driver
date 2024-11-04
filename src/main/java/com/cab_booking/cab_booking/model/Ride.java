@@ -31,7 +31,7 @@ public class Ride {
 	
 	
 @JsonIgnore
-private List<Integer> declinedDriversIntegers = new ArrayList<>();
+private List<Integer> declinedDrivers = new ArrayList<>();
 
 
 private double pickupLatitude;
@@ -86,12 +86,12 @@ public void setDriver(Driver driver) {
 	this.driver = driver;
 }
 
-public List<Integer> getDeclinedDriversIntegers() {
-	return declinedDriversIntegers;
+public List<Integer> getDeclinedDrivers() {
+	return declinedDrivers;
 }
 
-public void setDeclinedDriversIntegers(List<Integer> declinedDriversIntegers) {
-	this.declinedDriversIntegers = declinedDriversIntegers;
+public void setDeclinedDrivers(List<Integer> declinedDrivers) {
+	this.declinedDrivers = declinedDrivers;
 }
 
 public double getPickupLatitude() {
@@ -198,7 +198,7 @@ public void setPaymentDetails(PaymentDetails paymentDetails) {
 	this.paymentDetails = paymentDetails;
 }
 
-public Ride(Integer id, User user, Driver driver, List<Integer> declinedDriversIntegers, double pickupLatitude,
+public Ride(Integer id, User user, Driver driver, List<Integer> declinedDrivers, double pickupLatitude,
 		double pickupLongitude, double destinationLatitude, double destinationLongitude, String pickupArea,
 		String destinationArea, double distance, RideStatus status, LocalDateTime startTime, LocalDateTime endTime,
 		double fare, int otp, PaymentDetails paymentDetails) {
@@ -206,7 +206,7 @@ public Ride(Integer id, User user, Driver driver, List<Integer> declinedDriversI
 	this.id = id;
 	this.user = user;
 	this.driver = driver;
-	this.declinedDriversIntegers = declinedDriversIntegers;
+	this.declinedDrivers = declinedDrivers;
 	this.pickupLatitude = pickupLatitude;
 	this.pickupLongitude = pickupLongitude;
 	this.destinationLatitude = destinationLatitude;
@@ -229,16 +229,13 @@ public Ride() {
 
 @Override
 public String toString() {
-	return "Ride [id=" + id + ", user=" + user + ", driver=" + driver + ", declinedDriversIntegers="
-			+ declinedDriversIntegers + ", pickupLatitude=" + pickupLatitude + ", pickupLongitude=" + pickupLongitude
-			+ ", destinationLatitude=" + destinationLatitude + ", destinationLongitude=" + destinationLongitude
-			+ ", pickupArea=" + pickupArea + ", destinationArea=" + destinationArea + ", distance=" + distance
-			+ ", status=" + status + ", startTime=" + startTime + ", endTime=" + endTime + ", fare=" + fare + ", otp="
-			+ otp + ", paymentDetails=" + paymentDetails + "]";
+	return "Ride [id=" + id + ", user=" + user + ", driver=" + driver + ", declinedDrivers=" + declinedDrivers
+			+ ", pickupLatitude=" + pickupLatitude + ", pickupLongitude=" + pickupLongitude + ", destinationLatitude="
+			+ destinationLatitude + ", destinationLongitude=" + destinationLongitude + ", pickupArea=" + pickupArea
+			+ ", destinationArea=" + destinationArea + ", distance=" + distance + ", status=" + status + ", startTime="
+			+ startTime + ", endTime=" + endTime + ", fare=" + fare + ", otp=" + otp + ", paymentDetails="
+			+ paymentDetails + "]";
 }
-
-
-
 
 	
 }

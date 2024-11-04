@@ -10,6 +10,8 @@ import com.cab_booking.cab_booking.request.DriverSigupRequest;
 
 public interface driverService {
     
+	
+	//public  Driver findNearestDriver(List<Driver> availableDrivers, double pickupLatitude, double pickupLongitude, Ride ride);
     // Registers a new driver with the details provided in the DriverSignupRequest
     public Driver registerDriver(DriverSigupRequest driverSignupRequest);
     

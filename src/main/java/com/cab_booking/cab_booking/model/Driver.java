@@ -189,5 +189,10 @@ private License license;
 		this.totalRevenueInteger = totalRevenueInteger;
 	}
 
+	public Driver() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 }

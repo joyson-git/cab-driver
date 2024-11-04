@@ -3,8 +3,6 @@ package com.cab_booking.cab_booking.request;
 import com.cab_booking.cab_booking.model.License;
 import com.cab_booking.cab_booking.model.Vehicle;
 
-import jakarta.persistence.OneToOne;
-
 public class DriverSigupRequest {
 
 	private String name;
@@ -13,6 +11,8 @@ public class DriverSigupRequest {
 	private String password;
 	private double latitude;
 	private double longitude;
+	 private License license;  // Assuming this is the field for license
+	 private Vehicle vehicle;
 	public String getName() {
 		return name;
 	}
@@ -49,13 +49,26 @@ public class DriverSigupRequest {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
+	public License getLicense() {
+		return license;
+	}
+	public void setLicense(License license) {
+		this.license = license;
+	}
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
 	@Override
 	public String toString() {
 		return "DriverSigupRequest [name=" + name + ", email=" + email + ", mobile=" + mobile + ", password=" + password
-				+ ", latitude=" + latitude + ", longitude=" + longitude + "]";
+				+ ", latitude=" + latitude + ", longitude=" + longitude + ", license=" + license + ", vehicle="
+				+ vehicle + "]";
 	}
 	public DriverSigupRequest(String name, String email, String mobile, String password, double latitude,
-			double longitude) {
+			double longitude, License license, Vehicle vehicle) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -63,15 +76,13 @@ public class DriverSigupRequest {
 		this.password = password;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.license = license;
+		this.vehicle = vehicle;
 	}
-	
-	
-//	@OneToOne(mappedBy = "driver")
-//	private License license;
-	
-//	@OneToOne(mappedBy = "driver")
-//	private Vehicle vehicle;
-
+	public DriverSigupRequest() {
+		super();
+		// TODO Auto-generated constructor stub
+	} 
 	
 	
 }

@@ -78,6 +78,11 @@ public class License {
 		return "License [id=" + id + ", licenseNumber=" + licenseNumber + ", licenseState=" + licenseState
 				+ ", licenseExpirationDate=" + licenseExpirationDate + ", driver=" + driver + "]";
 	}
+
+	public License() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 }
