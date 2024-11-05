@@ -119,7 +119,7 @@ public class  driverServiceImplementation implements driverService {
     }
 
     
-    @Override
+
     public Driver findNearestDriver(List<Driver> availableDrivers, double pickupLatitude, double pickupLongitude, Ride ride) {
         double minDistance = Double.MAX_VALUE;
         Driver nearestDriver = null;
@@ -171,5 +171,12 @@ public class  driverServiceImplementation implements driverService {
         return rideRepository.getCompletedRides(driverId);
     }
 
+	@Override
+	public Driver findNearestDriver(List<Driver> availableDrivers, double pickupLatitude, double radius) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

@@ -19,7 +19,7 @@ public interface driverService {
     public List<Driver> getAvailableDrivers(double pickupLatitude, double pickupLongitude, double radius, Ride ride);
     
     // Finds the nearest driver from the list of available drivers
-    public Driver findNearestDriver(List<Driver> availableDrivers, double pickupLatitude, double radius, Ride ride);
+    public Driver findNearestDriver(List<Driver> availableDrivers, double pickupLatitude, double radius);
     
     // Retrieves the requested driver by decoding the JWT
     public Driver getRequestedDriver(String jwt) throws DriverException;

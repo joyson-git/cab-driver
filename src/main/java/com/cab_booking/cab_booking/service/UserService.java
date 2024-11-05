@@ -8,11 +8,9 @@ import com.cab_booking.cab_booking.model.Ride;
 import com.cab_booking.cab_booking.model.User;
 
 public interface UserService {
-	public User createUser(User user) throws UserException;
-	public User getReqUserProfile(String token) throws UserException;
-	public User findUserById(Integer Id) throws UserException;
-	public User findUserByEmail(String email) throws UserException;
-	public User findUserByToken(String token) throws UserException;
 	
-	public List<Ride> completedRids(Integer userld) throws UserException;
+	 public User createUser(User user) throws UserException;
+	    public User getReqUserProfile(String token) throws UserException;
+	    public User findUserById(Integer id) throws UserException;
+	    public List<Ride> completedRides(Integer userId) throws UserException;
 }

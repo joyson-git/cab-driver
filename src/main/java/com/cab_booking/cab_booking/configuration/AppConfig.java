@@ -26,6 +26,7 @@ public class AppConfig {
                 .and()
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtTokenValidationFilter(), BasicAuthenticationFilter.class)

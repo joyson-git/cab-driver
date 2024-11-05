@@ -50,6 +50,7 @@ private double distance;
 
 private RideStatus status;
 
+private long duration;
 
 private LocalDateTime startTime;
 
@@ -158,6 +159,14 @@ public void setStatus(RideStatus status) {
 	this.status = status;
 }
 
+public long getDuration() {
+	return duration;
+}
+
+public void setDuration(long duration) {
+	this.duration = duration;
+}
+
 public LocalDateTime getStartTime() {
 	return startTime;
 }
@@ -200,8 +209,8 @@ public void setPaymentDetails(PaymentDetails paymentDetails) {
 
 public Ride(Integer id, User user, Driver driver, List<Integer> declinedDrivers, double pickupLatitude,
 		double pickupLongitude, double destinationLatitude, double destinationLongitude, String pickupArea,
-		String destinationArea, double distance, RideStatus status, LocalDateTime startTime, LocalDateTime endTime,
-		double fare, int otp, PaymentDetails paymentDetails) {
+		String destinationArea, double distance, RideStatus status, long duration, LocalDateTime startTime,
+		LocalDateTime endTime, double fare, int otp, PaymentDetails paymentDetails) {
 	super();
 	this.id = id;
 	this.user = user;
@@ -215,6 +224,7 @@ public Ride(Integer id, User user, Driver driver, List<Integer> declinedDrivers,
 	this.destinationArea = destinationArea;
 	this.distance = distance;
 	this.status = status;
+	this.duration = duration;
 	this.startTime = startTime;
 	this.endTime = endTime;
 	this.fare = fare;
@@ -232,10 +242,10 @@ public String toString() {
 	return "Ride [id=" + id + ", user=" + user + ", driver=" + driver + ", declinedDrivers=" + declinedDrivers
 			+ ", pickupLatitude=" + pickupLatitude + ", pickupLongitude=" + pickupLongitude + ", destinationLatitude="
 			+ destinationLatitude + ", destinationLongitude=" + destinationLongitude + ", pickupArea=" + pickupArea
-			+ ", destinationArea=" + destinationArea + ", distance=" + distance + ", status=" + status + ", startTime="
-			+ startTime + ", endTime=" + endTime + ", fare=" + fare + ", otp=" + otp + ", paymentDetails="
-			+ paymentDetails + "]";
+			+ ", destinationArea=" + destinationArea + ", distance=" + distance + ", status=" + status + ", duration="
+			+ duration + ", startTime=" + startTime + ", endTime=" + endTime + ", fare=" + fare + ", otp=" + otp
+			+ ", paymentDetails=" + paymentDetails + "]";
 }
 
-	
+
 }
